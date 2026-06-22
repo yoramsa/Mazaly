@@ -8,6 +8,15 @@ export function formatDate(value: string | null): string {
   }).format(date)
 }
 
+export function formatTime(value: string | null): string {
+  if (!value) return ''
+  const date = new Date(value)
+  return new Intl.DateTimeFormat('fr-FR', {
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(date)
+}
+
 export function formatDateShort(value: string | null): string {
   if (!value) return ''
   const date = new Date(value)

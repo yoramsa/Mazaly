@@ -36,13 +36,13 @@ export default function AdresseCard({ adresse }: { adresse: Adresse }) {
             </span>
           )}
         </div>
-        <div className="flex flex-1 flex-col p-5">
-          <h3 className="font-serif text-lg font-bold text-marine transition-colors duration-300 group-hover:text-bleu">
+        <div className="flex flex-1 flex-col p-4">
+          <h3 className="font-serif text-base font-bold text-marine transition-colors duration-300 group-hover:text-bleu">
             {adresse.nom}
           </h3>
           {location && (
-            <p className="mt-1 flex items-center gap-1.5 text-sm text-marine/55">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-or">
+            <p className="mt-1 flex items-center gap-1.5 text-[0.8rem] text-marine/55">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-or">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
@@ -50,7 +50,7 @@ export default function AdresseCard({ adresse }: { adresse: Adresse }) {
             </p>
           )}
           {adresse.description && (
-            <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-marine/65">
+            <p className="mt-1.5 line-clamp-2 text-[0.8rem] leading-relaxed text-marine/60">
               {adresse.description}
             </p>
           )}

@@ -6,21 +6,24 @@ import AdresseCard from '@/components/AdresseCard'
 import SectionTitle from '@/components/SectionTitle'
 import NewsletterForm from '@/components/NewsletterForm'
 import PubBanner from '@/components/PubBanner'
+import MivzakPanel from '@/components/MivzakPanel'
 import Reveal from '@/components/motion/Reveal'
 import {
   getFeaturedArticles,
   getArticlesByType,
   getFeaturedAdresses,
+  getMivzakim,
 } from '@/lib/supabase/queries'
 
 export const revalidate = 60
 
 export default async function HomePage() {
-  const [featured, news, blog, adresses] = await Promise.all([
+  const [featured, news, blog, adresses, mivzakim] = await Promise.all([
     getFeaturedArticles(3).catch(() => []),
     getArticlesByType('news', 6).catch(() => []),
     getArticlesByType('blog', 4).catch(() => []),
     getFeaturedAdresses(6).catch(() => []),
+    getMivzakim(6).catch(() => []),
   ])
 
   const hero = featured[0]
@@ -41,10 +44,10 @@ export default async function HomePage() {
               <span className="h-1.5 w-1.5 rounded-full bg-brand-gradient" />
               Communauté francophone · Israël
             </span>
-            <h1 className="mt-5 font-serif text-4xl font-bold leading-[1.08] tracking-tight text-marine sm:text-5xl md:text-6xl">
+            <h1 className="mt-5 font-serif text-3xl font-bold leading-[1.12] tracking-tight text-marine sm:text-4xl md:text-5xl">
               Le média de la <span className="text-gradient">communauté</span> francophone en Israël
             </h1>
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-marine/65">
+            <p className="mt-5 max-w-md text-base leading-relaxed text-marine/65 md:text-lg">
               Actualités, articles de fond et bonnes adresses, sélectionnés pour
               celles et ceux qui font vivre la francophonie en Israël.
             </p>
@@ -77,6 +80,13 @@ export default async function HomePage() {
       </section>
 
       <div className="container-page pb-16">
+        {/* ===== MIVZAKIM ===== */}
+        {mivzakim.length > 0 && (
+          <Reveal as="section" className="mb-16">
+            <MivzakPanel items={mivzakim} />
+          </Reveal>
+        )}
+
         {/* ===== À LA UNE ===== */}
         {hero && (
           <Reveal as="section" className="mb-20">

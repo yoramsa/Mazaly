@@ -34,20 +34,20 @@ export default function ArticleCard({
             </span>
           )}
         </div>
-        <div className="flex flex-1 flex-col p-5">
-          <h3 className="font-serif text-lg font-bold leading-snug text-marine transition-colors duration-300 group-hover:text-bleu">
+        <div className="flex flex-1 flex-col p-4">
+          <h3 className="font-serif text-base font-bold leading-snug text-marine transition-colors duration-300 group-hover:text-bleu">
             {article.titre}
           </h3>
           {article.extrait && (
-            <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-marine/65">
+            <p className="mt-1.5 line-clamp-2 text-[0.8rem] leading-relaxed text-marine/60">
               {article.extrait}
             </p>
           )}
-          <div className="mt-auto flex items-center justify-between pt-4">
-            <p className="text-xs text-marine/45">
+          <div className="mt-auto flex items-center justify-between pt-3">
+            <p className="text-[0.7rem] text-marine/45">
               {formatDate(article.published_at || article.created_at)}
             </p>
-            <span className="text-sm font-medium text-bleu opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 -translate-x-1">
+            <span className="-translate-x-1 text-xs font-medium text-bleu opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
               Lire →
             </span>
           </div>
