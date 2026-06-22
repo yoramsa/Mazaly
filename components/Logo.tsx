@@ -1,26 +1,37 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Logo({ light = false }: { light?: boolean }) {
-  const textColor = light ? 'text-creme' : 'text-marine'
+export default function Logo({
+  light = false,
+  size = 40,
+}: {
+  light?: boolean
+  size?: number
+}) {
   return (
-    <Link href="/" className="flex items-center gap-2">
-      <svg width="38" height="38" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="#4A6FD4" opacity="0.12" />
-        <circle cx="32" cy="32" r="30" stroke="#4A6FD4" strokeWidth="2" />
-        <path
-          d="M14 32c6-10 22-10 28 0-6 10-22 10-28 0z"
-          fill="#7B5EA7"
+    <Link
+      href="/"
+      aria-label="Mazaly — accueil"
+      className="group flex items-center gap-2.5"
+    >
+      <span
+        className="relative inline-flex shrink-0 items-center justify-center transition-transform duration-500 ease-premium group-hover:scale-105 group-hover:rotate-[-3deg]"
+        style={{ width: size, height: size }}
+      >
+        <Image
+          src="/mazaly-icon.png"
+          alt="Mazaly"
+          width={size}
+          height={size}
+          priority
+          className="h-full w-full object-contain drop-shadow-[0_4px_10px_rgba(74,111,212,0.25)]"
         />
-        <path d="M42 24l8 8-8 8 3-8-3-8z" fill="#7B5EA7" />
-        <circle cx="24" cy="30" r="2.2" fill="#FAF8F5" />
-        <path
-          d="M34 20l3.5 6h-7L34 20zM34 32l-3.5-6h7L34 32z"
-          stroke="#C9A84C"
-          strokeWidth="1.6"
-          fill="none"
-        />
-      </svg>
-      <span className={`font-serif text-2xl font-bold tracking-tight ${textColor}`}>
+      </span>
+      <span
+        className={`font-serif text-[1.55rem] font-bold leading-none tracking-tight ${
+          light ? 'text-creme' : 'text-marine'
+        }`}
+      >
         Mazaly
       </span>
     </Link>

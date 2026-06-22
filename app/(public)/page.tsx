@@ -6,6 +6,7 @@ import AdresseCard from '@/components/AdresseCard'
 import SectionTitle from '@/components/SectionTitle'
 import NewsletterForm from '@/components/NewsletterForm'
 import PubBanner from '@/components/PubBanner'
+import Reveal from '@/components/motion/Reveal'
 import {
   getFeaturedArticles,
   getArticlesByType,
@@ -26,119 +27,193 @@ export default async function HomePage() {
   const secondary = featured.slice(1, 3)
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8">
-      {hero ? (
-        <section className="grid gap-6 md:grid-cols-2">
-          <Link
-            href={`/news/${hero.slug}`}
-            className="group relative overflow-hidden rounded-xl bg-marine"
-          >
-            <div className="relative aspect-[16/10]">
-              {hero.image_cover ? (
+    <div>
+      {/* ===== HERO ===== */}
+      <section className="relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute right-[-10%] top-[-20%] h-[34rem] w-[34rem] rounded-full bg-bleu/20 blur-[120px]" />
+          <div className="absolute left-[-10%] top-[20%] h-[28rem] w-[28rem] rounded-full bg-mauve/20 blur-[120px]" />
+        </div>
+
+        <div className="container-page grid items-center gap-12 py-16 md:grid-cols-2 md:py-24">
+          <Reveal>
+            <span className="eyebrow">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-gradient" />
+              Communauté francophone · Israël
+            </span>
+            <h1 className="mt-5 font-serif text-4xl font-bold leading-[1.08] tracking-tight text-marine sm:text-5xl md:text-6xl">
+              Le média de la <span className="text-gradient">communauté</span> francophone en Israël
+            </h1>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-marine/65">
+              Actualités, articles de fond et bonnes adresses, sélectionnés pour
+              celles et ceux qui font vivre la francophonie en Israël.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link href="/news" className="btn-primary">
+                Découvrir les news
+              </Link>
+              <Link href="/bonnes-adresses" className="btn-ghost">
+                Bonnes adresses
+              </Link>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.15} className="relative">
+            <div className="relative mx-auto aspect-square w-full max-w-sm">
+              <div className="absolute inset-6 rounded-[2.5rem] bg-brand-gradient opacity-90 blur-2xl" />
+              <div className="glass relative flex h-full w-full items-center justify-center rounded-[2.5rem] shadow-lift">
                 <Image
-                  src={hero.image_cover}
-                  alt={hero.titre}
-                  fill
+                  src="/mazaly-icon.png"
+                  alt="Mazaly"
+                  width={300}
+                  height={300}
                   priority
-                  className="object-cover opacity-90 transition-transform duration-300 group-hover:scale-105"
+                  className="w-3/5 animate-float drop-shadow-[0_20px_40px_rgba(74,111,212,0.35)]"
                 />
-              ) : (
-                <div className="mosaic h-full w-full" />
-              )}
-              <div className="absolute inset-0 bg-gradient-to-t from-marine via-marine/40 to-transparent" />
-            </div>
-            <div className="absolute bottom-0 p-6">
-              <span className="text-xs font-semibold uppercase tracking-wide text-or">
-                À la une
-              </span>
-              <h1 className="mt-2 font-serif text-2xl font-bold text-creme md:text-3xl">
-                {hero.titre}
-              </h1>
-              {hero.extrait && (
-                <p className="mt-2 line-clamp-2 text-sm text-creme/80">{hero.extrait}</p>
-              )}
-            </div>
-          </Link>
-          <div className="grid gap-6">
-            {secondary.map((article) => (
-              <ArticleCard key={article.id} article={article} basePath="/news" />
-            ))}
-            {secondary.length === 0 && (
-              <div className="mosaic flex items-center justify-center rounded-xl border border-or p-10 text-center text-marine/50">
-                Bientôt de nouveaux articles à la une.
               </div>
-            )}
-          </div>
-        </section>
-      ) : (
-        <section className="mosaic rounded-xl border border-or p-12 text-center">
-          <h1 className="font-serif text-3xl font-bold text-marine">
-            Bienvenue sur Mazaly
-          </h1>
-          <p className="mx-auto mt-3 max-w-xl text-marine/70">
-            Le média de la communauté francophone en Israël. Les premiers contenus
-            arrivent très bientôt.
-          </p>
-        </section>
-      )}
-
-      <section className="mt-14">
-        <SectionTitle title="News" href="/news" />
-        {news.length > 0 ? (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {news.map((article) => (
-              <ArticleCard key={article.id} article={article} basePath="/news" />
-            ))}
-          </div>
-        ) : (
-          <p className="text-marine/60">Aucune actualité pour le moment.</p>
-        )}
-      </section>
-
-      <section className="my-12">
-        <Suspense fallback={null}>
-          <PubBanner emplacement="home" />
-        </Suspense>
-      </section>
-
-      <section className="mt-6">
-        <SectionTitle title="Le Blog" href="/blog" />
-        {blog.length > 0 ? (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {blog.map((article) => (
-              <ArticleCard key={article.id} article={article} basePath="/blog" />
-            ))}
-          </div>
-        ) : (
-          <p className="text-marine/60">Aucun article de blog pour le moment.</p>
-        )}
-      </section>
-
-      <section className="mt-14">
-        <SectionTitle title="Bonnes adresses" href="/bonnes-adresses" />
-        {adresses.length > 0 ? (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {adresses.map((adresse) => (
-              <AdresseCard key={adresse.id} adresse={adresse} />
-            ))}
-          </div>
-        ) : (
-          <p className="text-marine/60">Aucune adresse pour le moment.</p>
-        )}
-      </section>
-
-      <section className="mosaic mt-16 rounded-xl border border-or bg-white p-8 text-center md:p-12">
-        <h2 className="font-serif text-2xl font-bold text-marine md:text-3xl">
-          Restez connecté à la communauté
-        </h2>
-        <p className="mx-auto mt-2 max-w-lg text-marine/70">
-          Inscrivez-vous à la newsletter Mazaly pour recevoir l'essentiel de
-          l'actualité francophone en Israël.
-        </p>
-        <div className="mx-auto mt-6 max-w-md">
-          <NewsletterForm />
+            </div>
+          </Reveal>
         </div>
       </section>
+
+      <div className="container-page pb-16">
+        {/* ===== À LA UNE ===== */}
+        {hero && (
+          <Reveal as="section" className="mb-20">
+            <SectionTitle title="À la une" eyebrow="En ce moment" />
+            <div className="grid gap-6 md:grid-cols-2">
+              <Link
+                href={`/news/${hero.slug}`}
+                className="group relative overflow-hidden rounded-3xl bg-marine shadow-card transition-all duration-500 ease-premium hover:-translate-y-1 hover:shadow-lift"
+              >
+                <div className="relative aspect-[16/11]">
+                  {hero.image_cover ? (
+                    <Image
+                      src={hero.image_cover}
+                      alt={hero.titre}
+                      fill
+                      priority
+                      className="object-cover transition-transform duration-700 ease-premium group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="mosaic h-full w-full" />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
+                </div>
+                <div className="absolute bottom-0 p-7">
+                  <span className="eyebrow border-white/20 bg-white/10 text-or">
+                    À la une
+                  </span>
+                  <h3 className="mt-3 font-serif text-2xl font-bold leading-snug text-creme md:text-3xl">
+                    {hero.titre}
+                  </h3>
+                  {hero.extrait && (
+                    <p className="mt-2 line-clamp-2 max-w-lg text-sm text-creme/75">
+                      {hero.extrait}
+                    </p>
+                  )}
+                </div>
+              </Link>
+
+              <div className="grid gap-6">
+                {secondary.map((article) => (
+                  <ArticleCard key={article.id} article={article} basePath="/news" />
+                ))}
+                {secondary.length === 0 && (
+                  <div className="surface mosaic flex items-center justify-center p-10 text-center text-marine/45">
+                    Bientôt de nouveaux articles à la une.
+                  </div>
+                )}
+              </div>
+            </div>
+          </Reveal>
+        )}
+
+        {/* ===== NEWS ===== */}
+        <Reveal as="section" className="mb-20">
+          <SectionTitle title="News" href="/news" eyebrow="Actualités" />
+          {news.length > 0 ? (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {news.map((article, i) => (
+                <Reveal key={article.id} delay={i * 0.06}>
+                  <ArticleCard article={article} basePath="/news" />
+                </Reveal>
+              ))}
+            </div>
+          ) : (
+            <EmptyState label="Aucune actualité pour le moment." />
+          )}
+        </Reveal>
+
+        <section className="mb-20">
+          <Suspense fallback={null}>
+            <PubBanner emplacement="home" />
+          </Suspense>
+        </section>
+
+        {/* ===== BLOG ===== */}
+        <Reveal as="section" className="mb-20">
+          <SectionTitle title="Le Blog" href="/blog" eyebrow="À lire" />
+          {blog.length > 0 ? (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {blog.map((article, i) => (
+                <Reveal key={article.id} delay={i * 0.06}>
+                  <ArticleCard article={article} basePath="/blog" />
+                </Reveal>
+              ))}
+            </div>
+          ) : (
+            <EmptyState label="Aucun article de blog pour le moment." />
+          )}
+        </Reveal>
+
+        {/* ===== BONNES ADRESSES ===== */}
+        <Reveal as="section" className="mb-20">
+          <SectionTitle title="Bonnes adresses" href="/bonnes-adresses" eyebrow="À découvrir" />
+          {adresses.length > 0 ? (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {adresses.map((adresse, i) => (
+                <Reveal key={adresse.id} delay={i * 0.06}>
+                  <AdresseCard adresse={adresse} />
+                </Reveal>
+              ))}
+            </div>
+          ) : (
+            <EmptyState label="Aucune adresse pour le moment." />
+          )}
+        </Reveal>
+
+        {/* ===== NEWSLETTER ===== */}
+        <Reveal as="section">
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-ink px-6 py-14 text-center shadow-lift md:px-12">
+            <div className="pointer-events-none absolute inset-0">
+              <div className="absolute left-1/4 top-0 h-60 w-60 rounded-full bg-bleu/25 blur-[90px]" />
+              <div className="absolute right-1/4 bottom-0 h-60 w-60 rounded-full bg-mauve/25 blur-[90px]" />
+            </div>
+            <div className="relative mx-auto max-w-lg">
+              <h2 className="font-serif text-3xl font-bold text-creme md:text-4xl">
+                Restez connecté à la communauté
+              </h2>
+              <p className="mx-auto mt-3 max-w-md text-creme/70">
+                Inscrivez-vous à la newsletter Mazaly et recevez l'essentiel de
+                l'actualité francophone en Israël.
+              </p>
+              <div className="mx-auto mt-8 max-w-md text-left">
+                <NewsletterForm variant="dark" />
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  )
+}
+
+function EmptyState({ label }: { label: string }) {
+  return (
+    <div className="surface mosaic flex flex-col items-center justify-center gap-2 px-6 py-14 text-center">
+      <span className="text-3xl">🐟</span>
+      <p className="text-marine/55">{label}</p>
     </div>
   )
 }

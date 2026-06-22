@@ -35,8 +35,8 @@ export default function NewsletterForm({
 
   const dark = variant === 'dark'
   const inputClass = dark
-    ? 'w-full rounded-md border border-creme/30 bg-creme/10 px-3 py-2 text-sm text-creme placeholder:text-creme/50 focus:border-or focus:outline-none'
-    : 'w-full rounded-md border border-marine/20 bg-white px-3 py-2 text-sm text-marine placeholder:text-marine/40 focus:border-bleu focus:outline-none'
+    ? 'w-full rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-creme shadow-inset backdrop-blur transition-all duration-200 placeholder:text-creme/45 focus:border-or/60 focus:bg-white/15 focus:outline-none focus:ring-4 focus:ring-or/10'
+    : 'input-premium'
 
   return (
     <form onSubmit={onSubmit} className="space-y-3">
@@ -58,12 +58,24 @@ export default function NewsletterForm({
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="w-full rounded-md bg-or px-4 py-2 text-sm font-semibold text-marine transition-opacity hover:opacity-90 disabled:opacity-60"
+        className={
+          dark
+            ? 'w-full rounded-full bg-or px-5 py-3 text-sm font-semibold text-marine transition-all duration-300 ease-premium hover:-translate-y-0.5 hover:shadow-lift disabled:opacity-60'
+            : 'btn-primary w-full py-3'
+        }
       >
         {status === 'loading' ? 'Inscription…' : "S'inscrire"}
       </button>
       {message && (
-        <p className={`text-xs ${status === 'error' ? 'text-red-400' : dark ? 'text-or' : 'text-bleu'}`}>
+        <p
+          className={`text-xs ${
+            status === 'error'
+              ? 'text-red-400'
+              : dark
+                ? 'text-or'
+                : 'text-bleu'
+          }`}
+        >
           {message}
         </p>
       )}

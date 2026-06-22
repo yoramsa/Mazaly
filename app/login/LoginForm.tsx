@@ -32,31 +32,27 @@ export default function LoginForm() {
   return (
     <form onSubmit={onSubmit} className="mt-6 space-y-4">
       <div>
-        <label className="mb-1 block text-sm font-medium text-marine">Email</label>
+        <label className="mb-1.5 block text-sm font-medium text-marine">Email</label>
         <input
           type="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-md border border-marine/20 px-3 py-2 text-sm focus:border-bleu focus:outline-none"
+          className="input-premium"
         />
       </div>
       <div>
-        <label className="mb-1 block text-sm font-medium text-marine">Mot de passe</label>
+        <label className="mb-1.5 block text-sm font-medium text-marine">Mot de passe</label>
         <input
           type="password"
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full rounded-md border border-marine/20 px-3 py-2 text-sm focus:border-bleu focus:outline-none"
+          className="input-premium"
         />
       </div>
       {error && <p className="text-sm text-red-500">{error}</p>}
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full rounded-md bg-marine px-4 py-2 text-sm font-semibold text-creme hover:bg-bleu disabled:opacity-60"
-      >
+      <button type="submit" disabled={loading} className="btn-primary w-full py-3">
         {loading ? 'Connexion…' : 'Se connecter'}
       </button>
     </form>
