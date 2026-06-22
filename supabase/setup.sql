@@ -1,4 +1,4 @@
-create table profiles (
+create table if not exists profiles (
   id uuid references auth.users primary key,
   nom text,
   avatar_url text,
@@ -6,7 +6,7 @@ create table profiles (
   created_at timestamp default now()
 );
 
-create table categories (
+create table if not exists categories (
   id uuid primary key default gen_random_uuid(),
   nom text not null,
   slug text unique not null,
@@ -16,13 +16,13 @@ create table categories (
   created_at timestamp default now()
 );
 
-create table tags (
+create table if not exists tags (
   id uuid primary key default gen_random_uuid(),
   nom text not null,
   slug text unique not null
 );
 
-create table articles (
+create table if not exists articles (
   id uuid primary key default gen_random_uuid(),
   titre text not null,
   slug text unique not null,
@@ -38,13 +38,13 @@ create table articles (
   published_at timestamp
 );
 
-create table articles_tags (
+create table if not exists articles_tags (
   article_id uuid references articles(id) on delete cascade,
   tag_id uuid references tags(id) on delete cascade,
   primary key (article_id, tag_id)
 );
 
-create table adresses (
+create table if not exists adresses (
   id uuid primary key default gen_random_uuid(),
   nom text not null,
   slug text unique not null,
@@ -66,7 +66,7 @@ create table adresses (
   created_at timestamp default now()
 );
 
-create table avis (
+create table if not exists avis (
   id uuid primary key default gen_random_uuid(),
   adresse_id uuid references adresses(id) on delete cascade,
   user_id uuid references profiles(id),
@@ -75,7 +75,7 @@ create table avis (
   created_at timestamp default now()
 );
 
-create table marques (
+create table if not exists marques (
   id uuid primary key default gen_random_uuid(),
   nom text not null,
   slug text unique not null,
@@ -89,7 +89,7 @@ create table marques (
   created_at timestamp default now()
 );
 
-create table publicites (
+create table if not exists publicites (
   id uuid primary key default gen_random_uuid(),
   titre text,
   image text not null,
@@ -103,7 +103,7 @@ create table publicites (
   created_at timestamp default now()
 );
 
-create table newsletters (
+create table if not exists newsletters (
   id uuid primary key default gen_random_uuid(),
   email text unique not null,
   nom text,
@@ -146,40 +146,66 @@ as $$
   );
 $$;
 
+drop policy if exists profiles_select_public on profiles;
 create policy profiles_select_public on profiles for select using (true);
+drop policy if exists profiles_update_self on profiles;
 create policy profiles_update_self on profiles for update using (auth.uid() = id);
+drop policy if exists profiles_admin_all on profiles;
 create policy profiles_admin_all on profiles for all using (is_admin());
 
+drop policy if exists categories_select_public on categories;
 create policy categories_select_public on categories for select using (true);
+drop policy if exists categories_staff_write on categories;
 create policy categories_staff_write on categories for all using (is_staff());
 
+drop policy if exists tags_select_public on tags;
 create policy tags_select_public on tags for select using (true);
+drop policy if exists tags_staff_write on tags;
 create policy tags_staff_write on tags for all using (is_staff());
 
+drop policy if exists articles_select_published on articles;
 create policy articles_select_published on articles for select using (statut = 'published');
+drop policy if exists articles_staff_select on articles;
 create policy articles_staff_select on articles for select using (is_staff());
+drop policy if exists articles_staff_write on articles;
 create policy articles_staff_write on articles for all using (is_staff());
 
+drop policy if exists articles_tags_select_public on articles_tags;
 create policy articles_tags_select_public on articles_tags for select using (true);
+drop policy if exists articles_tags_staff_write on articles_tags;
 create policy articles_tags_staff_write on articles_tags for all using (is_staff());
 
+drop policy if exists adresses_select_published on adresses;
 create policy adresses_select_published on adresses for select using (statut = 'published');
+drop policy if exists adresses_staff_select on adresses;
 create policy adresses_staff_select on adresses for select using (is_staff());
+drop policy if exists adresses_staff_write on adresses;
 create policy adresses_staff_write on adresses for all using (is_staff());
 
+drop policy if exists avis_select_public on avis;
 create policy avis_select_public on avis for select using (true);
+drop policy if exists avis_insert_auth on avis;
 create policy avis_insert_auth on avis for insert with check (auth.uid() = user_id);
+drop policy if exists avis_delete_self on avis;
 create policy avis_delete_self on avis for delete using (auth.uid() = user_id or is_staff());
 
+drop policy if exists marques_select_published on marques;
 create policy marques_select_published on marques for select using (statut = 'published');
+drop policy if exists marques_staff_select on marques;
 create policy marques_staff_select on marques for select using (is_staff());
+drop policy if exists marques_staff_write on marques;
 create policy marques_staff_write on marques for all using (is_staff());
 
+drop policy if exists publicites_select_active on publicites;
 create policy publicites_select_active on publicites for select using (actif = true);
+drop policy if exists publicites_staff_all on publicites;
 create policy publicites_staff_all on publicites for all using (is_staff());
 
+drop policy if exists newsletters_insert_public on newsletters;
 create policy newsletters_insert_public on newsletters for insert with check (true);
+drop policy if exists newsletters_staff_select on newsletters;
 create policy newsletters_staff_select on newsletters for select using (is_staff());
+drop policy if exists newsletters_staff_write on newsletters;
 create policy newsletters_staff_write on newsletters for all using (is_staff());
 
 create or replace function increment_vues(article_slug text)
@@ -202,6 +228,7 @@ begin
 end;
 $$;
 
+drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function handle_new_user();
@@ -214,20 +241,25 @@ insert into categories (nom, slug, type, couleur) values
   ('Lifestyle', 'lifestyle', 'blog', '#C9A84C'),
   ('Restaurants', 'restaurants', 'adresse', '#C9A84C'),
   ('Commerces', 'commerces', 'adresse', '#4A6FD4'),
-  ('Services', 'services', 'adresse', '#1B2B6B');
+  ('Services', 'services', 'adresse', '#1B2B6B')
+on conflict (slug) do nothing;
 
 insert into storage.buckets (id, name, public)
 values ('articles', 'articles', true), ('adresses', 'adresses', true), ('publicites', 'publicites', true)
 on conflict (id) do nothing;
 
+drop policy if exists storage_public_read on storage.objects;
 create policy storage_public_read on storage.objects
   for select using (bucket_id in ('articles', 'adresses', 'publicites'));
 
+drop policy if exists storage_staff_insert on storage.objects;
 create policy storage_staff_insert on storage.objects
   for insert with check (bucket_id in ('articles', 'adresses', 'publicites') and is_staff());
 
+drop policy if exists storage_staff_update on storage.objects;
 create policy storage_staff_update on storage.objects
   for update using (bucket_id in ('articles', 'adresses', 'publicites') and is_staff());
 
+drop policy if exists storage_staff_delete on storage.objects;
 create policy storage_staff_delete on storage.objects
   for delete using (bucket_id in ('articles', 'adresses', 'publicites') and is_staff());
