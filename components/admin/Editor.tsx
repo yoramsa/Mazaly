@@ -4,8 +4,6 @@ import { useEditor, EditorContent, type Editor as TipTapEditor } from '@tiptap/r
 import StarterKit from '@tiptap/starter-kit'
 import Link from '@tiptap/extension-link'
 import ImageExt from '@tiptap/extension-image'
-import { createClient } from '@/lib/supabase/client'
-import { slugify } from '@/lib/utils/slug'
 
 function ToolbarButton({
   active,
@@ -38,14 +36,13 @@ function Toolbar({ editor }: { editor: TipTapEditor }) {
     input.onchange = async () => {
       const file = input.files?.[0]
       if (!file) return
-      const supabase = createClient()
-      const ext = file.name.split('.').pop() || 'jpg'
-      const base = slugify(file.name.replace(/\.[^.]+$/, '')) || 'inline'
-      const path = `inline/${Date.now()}-${base}.${ext}`
-      const { error } = await supabase.storage.from('articles').upload(path, file)
-      if (error) return
-      const { data } = supabase.storage.from('articles').getPublicUrl(path)
-      editor.chain().focus().setImage({ src: data.publicUrl }).run()
+      const body = new FormData()
+      body.append('file', file)
+      body.append('bucket', 'articles')
+      const res = await fetch('/api/upload', { method: 'POST', body })
+      if (!res.ok) return
+      const data = await res.json()
+      editor.chain().focus().setImage({ src: data.url }).run()
     }
     input.click()
   }

@@ -2,8 +2,6 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
-import { slugify } from '@/lib/utils/slug'
 
 export default function ImageUpload({
   bucket,
@@ -23,16 +21,13 @@ export default function ImageUpload({
     setUploading(true)
     setError('')
     try {
-      const supabase = createClient()
-      const ext = file.name.split('.').pop() || 'jpg'
-      const base = slugify(file.name.replace(/\.[^.]+$/, '')) || 'image'
-      const path = `${Date.now()}-${base}.${ext}`
-      const { error: upErr } = await supabase.storage
-        .from(bucket)
-        .upload(path, file, { cacheControl: '3600', upsert: false })
-      if (upErr) throw upErr
-      const { data } = supabase.storage.from(bucket).getPublicUrl(path)
-      onChange(data.publicUrl)
+      const body = new FormData()
+      body.append('file', file)
+      body.append('bucket', bucket)
+      const res = await fetch('/api/upload', { method: 'POST', body })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Upload impossible')
+      onChange(data.url)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload impossible')
     } finally {
