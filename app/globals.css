@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-creme text-marine font-sans antialiased;
+  }
+}
+
+.richtext {
+  @apply text-marine leading-relaxed;
+}
+
+.richtext p {
+  @apply mb-4;
+}
+
+.richtext h2 {
+  @apply font-serif text-2xl font-bold text-marine mt-8 mb-3;
+}
+
+.richtext h3 {
+  @apply font-serif text-xl font-semibold text-marine mt-6 mb-2;
+}
+
+.richtext a {
+  @apply text-bleu underline;
+}
+
+.richtext ul {
+  @apply list-disc pl-6 mb-4;
+}
+
+.richtext ol {
+  @apply list-decimal pl-6 mb-4;
+}
+
+.richtext img {
+  @apply rounded-lg my-6 w-full;
+}
+
+.richtext blockquote {
+  @apply border-l-4 border-or pl-4 italic my-4;
+}
+
+.mosaic {
+  background-image: radial-gradient(#C9A84C22 1px, transparent 1px);
+  background-size: 18px 18px;
+}
