@@ -99,3 +99,12 @@ export type Newsletter = {
   actif: boolean
   created_at: string
 }
+
+export type Mivzak = {
+  id: string
+  texte: string
+  lien: string | null
+  urgent: boolean
+  actif: boolean
+  created_at: string
+}

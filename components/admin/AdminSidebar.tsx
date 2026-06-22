@@ -8,6 +8,7 @@ import type { Role } from '@/lib/types'
 const items = [
   { href: '/admin', label: 'Tableau de bord', exact: true },
   { href: '/admin/articles', label: 'Articles' },
+  { href: '/admin/mivzak', label: 'Mivzak (flashes)' },
   { href: '/admin/adresses', label: 'Bonnes adresses' },
   { href: '/admin/categories', label: 'Catégories' },
   { href: '/admin/tags', label: 'Tags' },

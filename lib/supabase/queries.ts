@@ -1,5 +1,16 @@
 import { createClient } from '@/lib/supabase/server'
-import type { Article, Adresse, Publicite } from '@/lib/types'
+import type { Article, Adresse, Publicite, Mivzak } from '@/lib/types'
+
+export async function getMivzakim(limit = 12) {
+  const supabase = createClient()
+  const { data } = await supabase
+    .from('mivzakim')
+    .select('*')
+    .eq('actif', true)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return (data ?? []) as Mivzak[]
+}
 
 export async function getFeaturedArticles(limit = 3) {
   const supabase = createClient()
