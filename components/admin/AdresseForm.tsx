@@ -26,6 +26,7 @@ export default function AdresseForm({
   const [adresseTxt, setAdresseTxt] = useState(adresse?.adresse ?? '')
   const [ville, setVille] = useState(adresse?.ville ?? '')
   const [region, setRegion] = useState(adresse?.region ?? '')
+  const [pays, setPays] = useState(adresse?.pays ?? 'Israël')
   const [telephone, setTelephone] = useState(adresse?.telephone ?? '')
   const [siteWeb, setSiteWeb] = useState(adresse?.site_web ?? '')
   const [email, setEmail] = useState(adresse?.email ?? '')
@@ -57,6 +58,7 @@ export default function AdresseForm({
       adresse: adresseTxt || null,
       ville: ville || null,
       region: region || null,
+      pays: pays || null,
       telephone: telephone || null,
       site_web: siteWeb || null,
       email: email || null,
@@ -114,6 +116,12 @@ export default function AdresseForm({
           </Field>
           <Field label="Région">
             <input className={inputClass} value={region} onChange={(e) => setRegion(e.target.value)} />
+          </Field>
+          <Field label="Pays">
+            <select className={inputClass} value={pays} onChange={(e) => setPays(e.target.value)}>
+              <option value="Israël">Israël</option>
+              <option value="France">France</option>
+            </select>
           </Field>
           <Field label="Téléphone">
             <input className={inputClass} value={telephone} onChange={(e) => setTelephone(e.target.value)} />

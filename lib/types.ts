@@ -53,6 +53,7 @@ export type Adresse = {
   adresse: string | null
   ville: string | null
   region: string | null
+  pays: string | null
   telephone: string | null
   site_web: string | null
   email: string | null

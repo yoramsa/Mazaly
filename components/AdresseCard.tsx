@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Adresse } from '@/lib/types'
+import { paysFlag } from '@/lib/utils/pays'
 
 export default function AdresseCard({ adresse }: { adresse: Adresse }) {
   const location = [adresse.ville, adresse.region].filter(Boolean).join(', ')
@@ -26,6 +27,12 @@ export default function AdresseCard({ adresse }: { adresse: Adresse }) {
               style={{ color: adresse.categories.couleur || '#C9A84C' }}
             >
               {adresse.categories.nom}
+            </span>
+          )}
+          {adresse.pays && (
+            <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/85 px-2.5 py-1 text-[0.7rem] font-semibold text-marine shadow-soft backdrop-blur">
+              <span className="text-sm leading-none">{paysFlag(adresse.pays)}</span>
+              {adresse.pays}
             </span>
           )}
         </div>

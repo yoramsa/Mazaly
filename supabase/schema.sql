@@ -53,6 +53,7 @@ create table adresses (
   adresse text,
   ville text,
   region text,
+  pays text default 'Israël',
   telephone text,
   site_web text,
   email text,
