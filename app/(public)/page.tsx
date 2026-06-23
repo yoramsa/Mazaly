@@ -87,6 +87,22 @@ export default async function HomePage() {
           </Reveal>
         )}
 
+        {/* ===== BONNES ADRESSES (À découvrir) ===== */}
+        <Reveal as="section" className="mb-20">
+          <SectionTitle title="Bonnes adresses" href="/bonnes-adresses" eyebrow="À découvrir" />
+          {adresses.length > 0 ? (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {adresses.map((adresse, i) => (
+                <Reveal key={adresse.id} delay={i * 0.06}>
+                  <AdresseCard adresse={adresse} />
+                </Reveal>
+              ))}
+            </div>
+          ) : (
+            <EmptyState label="Aucune adresse pour le moment." />
+          )}
+        </Reveal>
+
         {/* ===== À LA UNE ===== */}
         {hero && (
           <Reveal as="section" className="mb-20">
@@ -174,22 +190,6 @@ export default async function HomePage() {
             </div>
           ) : (
             <EmptyState label="Aucun article de blog pour le moment." />
-          )}
-        </Reveal>
-
-        {/* ===== BONNES ADRESSES ===== */}
-        <Reveal as="section" className="mb-20">
-          <SectionTitle title="Bonnes adresses" href="/bonnes-adresses" eyebrow="À découvrir" />
-          {adresses.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {adresses.map((adresse, i) => (
-                <Reveal key={adresse.id} delay={i * 0.06}>
-                  <AdresseCard adresse={adresse} />
-                </Reveal>
-              ))}
-            </div>
-          ) : (
-            <EmptyState label="Aucune adresse pour le moment." />
           )}
         </Reveal>
 
