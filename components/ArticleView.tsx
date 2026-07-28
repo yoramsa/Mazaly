@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Article } from '@/lib/types'
-import { formatDate, readingTimeMinutes } from '@/lib/utils/format'
+import { authorName, formatDate, readingTimeMinutes } from '@/lib/utils/format'
 import { CategoryBadge } from '@/components/ui/Badge'
 import { CalendarIcon, ClockIcon, EyeIcon, PenIcon } from '@/components/ui/icons'
 import ArticleCard from '@/components/ArticleCard'
@@ -26,6 +26,7 @@ export default function ArticleView({
   related = [],
 }: ArticleViewProps) {
   const minutes = readingTimeMinutes(article.contenu)
+  const auteur = authorName(article.profiles?.nom)
 
   return (
     <div className="relative overflow-hidden">
@@ -56,10 +57,10 @@ export default function ArticleView({
             </h1>
 
             <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-marine/55">
-              {article.profiles?.nom && (
+              {auteur && (
                 <span className="inline-flex items-center gap-1.5">
                   <PenIcon size={14} className="text-or" />
-                  {article.profiles.nom}
+                  {auteur}
                 </span>
               )}
               <span className="inline-flex items-center gap-1.5">

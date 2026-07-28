@@ -1,3 +1,15 @@
+/**
+ * Nom d'auteur affichable publiquement.
+ * Supabase renseigne `profiles.nom` avec l'email quand le compte n'a pas de nom :
+ * on n'affiche jamais une adresse email sur le site.
+ */
+export function authorName(nom: string | null | undefined): string | null {
+  const value = nom?.trim()
+  if (!value) return null
+  if (value.includes('@')) return null
+  return value
+}
+
 export function formatDate(value: string | null): string {
   if (!value) return ''
   const date = new Date(value)
