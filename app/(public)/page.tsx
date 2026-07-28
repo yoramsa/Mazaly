@@ -4,7 +4,8 @@ import { Suspense } from 'react'
 import ArticleCard from '@/components/ArticleCard'
 import AdresseCard from '@/components/AdresseCard'
 import SectionTitle from '@/components/SectionTitle'
-import NewsletterForm from '@/components/NewsletterForm'
+import NewsletterCta from '@/components/NewsletterCta'
+import EmptyState from '@/components/ui/EmptyState'
 import PubBanner from '@/components/PubBanner'
 import MivzakPanel from '@/components/MivzakPanel'
 import Reveal from '@/components/motion/Reveal'
@@ -195,35 +196,9 @@ export default async function HomePage() {
 
         {/* ===== NEWSLETTER ===== */}
         <Reveal as="section">
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-ink px-6 py-14 text-center shadow-lift md:px-12">
-            <div className="pointer-events-none absolute inset-0">
-              <div className="absolute left-1/4 top-0 h-60 w-60 rounded-full bg-bleu/25 blur-[90px]" />
-              <div className="absolute right-1/4 bottom-0 h-60 w-60 rounded-full bg-mauve/25 blur-[90px]" />
-            </div>
-            <div className="relative mx-auto max-w-lg">
-              <h2 className="font-serif text-3xl font-bold text-creme md:text-4xl">
-                Restez connecté à la communauté
-              </h2>
-              <p className="mx-auto mt-3 max-w-md text-creme/70">
-                Inscrivez-vous à la newsletter Mazaly et recevez l'essentiel de
-                l'actualité francophone en Israël.
-              </p>
-              <div className="mx-auto mt-8 max-w-md text-left">
-                <NewsletterForm variant="dark" />
-              </div>
-            </div>
-          </div>
+          <NewsletterCta />
         </Reveal>
       </div>
-    </div>
-  )
-}
-
-function EmptyState({ label }: { label: string }) {
-  return (
-    <div className="surface mosaic flex flex-col items-center justify-center gap-2 px-6 py-14 text-center">
-      <span className="text-3xl">🐟</span>
-      <p className="text-marine/55">{label}</p>
     </div>
   )
 }

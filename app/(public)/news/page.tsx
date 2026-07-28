@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import ArticleCard from '@/components/ArticleCard'
 import PageHeader from '@/components/PageHeader'
+import EmptyState from '@/components/ui/EmptyState'
 import Reveal from '@/components/motion/Reveal'
 import { getArticlesByType } from '@/lib/supabase/queries'
 
@@ -31,10 +32,7 @@ export default async function NewsPage() {
             ))}
           </div>
         ) : (
-          <div className="surface mosaic flex flex-col items-center gap-2 px-6 py-16 text-center text-marine/55">
-            <span className="text-3xl">🐟</span>
-            Aucune actualité publiée pour le moment.
-          </div>
+          <EmptyState label="Aucune actualité publiée pour le moment." />
         )}
       </div>
     </div>

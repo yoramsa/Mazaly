@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import AdresseCard from '@/components/AdresseCard'
+import EmptyState from '@/components/ui/EmptyState'
 import { paysFlag } from '@/lib/utils/pays'
 import type { Adresse } from '@/lib/types'
 
@@ -29,12 +30,7 @@ export default function AdressesExplorer({ adresses }: { adresses: Adresse[] }) 
     p === 'all' ? adresses.length : adresses.filter((a) => a.pays === p).length
 
   if (adresses.length === 0) {
-    return (
-      <div className="surface mosaic flex flex-col items-center gap-2 px-6 py-16 text-center text-marine/55">
-        <span className="text-3xl">🐟</span>
-        Aucune adresse publiée pour le moment.
-      </div>
-    )
+    return <EmptyState label="Aucune adresse publiée pour le moment." />
   }
 
   const tabs = pays.length > 1 ? ['all', ...pays] : []
@@ -93,10 +89,7 @@ export default function AdressesExplorer({ adresses }: { adresses: Adresse[] }) 
       </motion.div>
 
       {filtered.length === 0 && (
-        <div className="surface mosaic mt-2 flex flex-col items-center gap-2 px-6 py-14 text-center text-marine/55">
-          <span className="text-3xl">🐟</span>
-          Aucune adresse pour ce pays pour le moment.
-        </div>
+        <EmptyState label="Aucune adresse pour ce pays pour le moment." className="mt-2" />
       )}
     </div>
   )

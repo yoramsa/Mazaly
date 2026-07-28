@@ -3,7 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getAdresseBySlug } from '@/lib/supabase/queries'
-import { paysFlag } from '@/lib/utils/pays'
+import { CategoryBadge, PaysBadge } from '@/components/ui/Badge'
+import { MapPinIcon } from '@/components/ui/icons'
 
 export const revalidate = 60
 
@@ -69,19 +70,9 @@ export default async function AdressePage({
 
       <div className="mt-5 flex flex-wrap items-center gap-2">
         {adresse.categories && (
-          <span
-            className="rounded-full bg-white/70 px-3 py-1 text-xs font-semibold uppercase tracking-wide shadow-soft backdrop-blur"
-            style={{ color: adresse.categories.couleur || '#C9A84C' }}
-          >
-            {adresse.categories.nom}
-          </span>
+          <CategoryBadge categorie={adresse.categories} fallbackColor="#C9A84C" />
         )}
-        {adresse.pays && (
-          <span className="inline-flex items-center gap-1 rounded-full bg-white/70 px-3 py-1 text-xs font-semibold text-marine shadow-soft backdrop-blur">
-            <span className="text-sm leading-none">{paysFlag(adresse.pays)}</span>
-            {adresse.pays}
-          </span>
-        )}
+        {adresse.pays && <PaysBadge pays={adresse.pays} />}
       </div>
 
       <h1 className="mt-4 font-serif text-4xl font-bold leading-tight text-marine md:text-5xl">
@@ -89,10 +80,7 @@ export default async function AdressePage({
       </h1>
       {location && (
         <p className="mt-2 flex items-center gap-1.5 text-marine/60">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-or">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-            <circle cx="12" cy="10" r="3" />
-          </svg>
+          <MapPinIcon size={16} className="text-or" />
           {location}
         </p>
       )}
@@ -141,10 +129,7 @@ export default async function AdressePage({
             rel="noopener noreferrer"
             className="btn-primary mt-5 w-full"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
+            <MapPinIcon size={16} />
             Voir sur Google Maps
           </a>
 

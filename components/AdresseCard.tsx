@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Adresse } from '@/lib/types'
-import { paysFlag } from '@/lib/utils/pays'
+import { CategoryBadge, PaysBadge } from '@/components/ui/Badge'
+import { MapPinIcon } from '@/components/ui/icons'
 
 export default function AdresseCard({ adresse }: { adresse: Adresse }) {
   const location = [adresse.ville, adresse.region].filter(Boolean).join(', ')
@@ -22,19 +23,13 @@ export default function AdresseCard({ adresse }: { adresse: Adresse }) {
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-marine/30 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           {adresse.categories && (
-            <span
-              className="absolute left-3 top-3 rounded-full bg-white/85 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-wide shadow-soft backdrop-blur"
-              style={{ color: adresse.categories.couleur || '#C9A84C' }}
-            >
-              {adresse.categories.nom}
-            </span>
+            <CategoryBadge
+              categorie={adresse.categories}
+              fallbackColor="#C9A84C"
+              className="absolute left-3 top-3"
+            />
           )}
-          {adresse.pays && (
-            <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/85 px-2.5 py-1 text-[0.7rem] font-semibold text-marine shadow-soft backdrop-blur">
-              <span className="text-sm leading-none">{paysFlag(adresse.pays)}</span>
-              {adresse.pays}
-            </span>
-          )}
+          {adresse.pays && <PaysBadge pays={adresse.pays} className="absolute right-3 top-3" />}
         </div>
         <div className="flex flex-1 flex-col p-4">
           <h3 className="font-serif text-base font-bold text-marine transition-colors duration-300 group-hover:text-bleu">
@@ -42,10 +37,7 @@ export default function AdresseCard({ adresse }: { adresse: Adresse }) {
           </h3>
           {location && (
             <p className="mt-1 flex items-center gap-1.5 text-[0.8rem] text-marine/55">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-or">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
+              <MapPinIcon size={13} className="text-or" />
               {location}
             </p>
           )}

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import ArticleView from '@/components/ArticleView'
-import { getArticleBySlug } from '@/lib/supabase/queries'
+import { getArticleBySlug, getArticlesByType } from '@/lib/supabase/queries'
 
 export const revalidate = 60
 
@@ -31,5 +31,17 @@ export default async function BlogArticlePage({
 }) {
   const article = await getArticleBySlug(params.slug).catch(() => null)
   if (!article) notFound()
-  return <ArticleView article={article} />
+
+  const related = (await getArticlesByType('blog', 4).catch(() => [])).filter(
+    (a) => a.slug !== article.slug,
+  )
+
+  return (
+    <ArticleView
+      article={article}
+      basePath="/blog"
+      backLabel="Tous les articles du blog"
+      related={related}
+    />
+  )
 }

@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { Article } from '@/lib/types'
 import { formatDate } from '@/lib/utils/format'
+import { CategoryBadge } from '@/components/ui/Badge'
 
 export default function ArticleCard({
   article,
@@ -26,12 +27,7 @@ export default function ArticleCard({
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-marine/25 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           {article.categories && (
-            <span
-              className="absolute left-3 top-3 rounded-full bg-white/85 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-wide shadow-soft backdrop-blur"
-              style={{ color: article.categories.couleur || '#4A6FD4' }}
-            >
-              {article.categories.nom}
-            </span>
+            <CategoryBadge categorie={article.categories} className="absolute left-3 top-3" />
           )}
         </div>
         <div className="flex flex-1 flex-col p-4">

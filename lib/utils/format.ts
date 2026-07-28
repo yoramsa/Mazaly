@@ -17,6 +17,16 @@ export function formatTime(value: string | null): string {
   }).format(date)
 }
 
+/** Temps de lecture estimé (~200 mots/min) à partir d'un contenu HTML. */
+export function readingTimeMinutes(html: string | null): number {
+  if (!html) return 1
+  const words = html
+    .replace(/<[^>]*>/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean).length
+  return Math.max(1, Math.round(words / 200))
+}
+
 export function formatDateShort(value: string | null): string {
   if (!value) return ''
   const date = new Date(value)
