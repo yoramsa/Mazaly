@@ -222,8 +222,10 @@ language plpgsql
 security definer
 as $$
 begin
+  -- Pas de repli sur l'email : profiles.nom est affiché publiquement
+  -- comme signature d'article.
   insert into profiles (id, nom, role)
-  values (new.id, coalesce(new.raw_user_meta_data->>'nom', new.email), 'lecteur');
+  values (new.id, new.raw_user_meta_data->>'nom', 'lecteur');
   return new;
 end;
 $$;
