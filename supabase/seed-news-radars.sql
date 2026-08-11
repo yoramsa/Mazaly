@@ -1,5 +1,5 @@
 -- ============================================================
---  Mazaly — News : nouveaux seuils d'aquisition des radars
+--  Mazaly — News : nouveaux seuils de déclenchement des radars
 --  Chiffres : infographie officielle de la campagne sécurité routière.
 --  Contexte vérifié : Ynet, N12/Mako (plan d'application 2026).
 --  À exécuter dans Supabase (SQL Editor). Relançable sans doublon.
@@ -15,7 +15,7 @@ values
 <p>Concrètement, la « marge de tolérance » — cet écart au-dessus de la vitesse autorisée en dessous duquel aucun avis de contravention n'était émis — est réduite de moitié sur certains axes. Voici le détail.</p>
 
 <figure>
-<img src="/images/body-nouveaux-seuils-radars-israel.jpg" alt="Infographie officielle : les nouveaux seuils d'aquisition des radars en Israël" />
+<img src="/images/body-nouveaux-seuils-radars-israel.jpg" alt="Infographie officielle : les nouveaux seuils de déclenchement des radars en Israël" />
 <figcaption>L'infographie officielle de la campagne de sécurité routière. Traduction et explications ci-dessous.</figcaption>
 </figure>
 
