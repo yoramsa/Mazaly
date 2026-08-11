@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import Logo from './Logo'
 import NewsletterForm from './NewsletterForm'
+import { WhatsAppButton } from './WhatsAppCta'
+import { WHATSAPP_CHANNEL_URL } from '@/lib/config'
 
 export default function Footer() {
   return (
@@ -46,13 +48,15 @@ export default function Footer() {
 
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-or">
-            Newsletter
+            {WHATSAPP_CHANNEL_URL ? 'Nous suivre' : 'Newsletter'}
           </h3>
           <p className="mt-5 text-sm leading-relaxed text-creme/70">
-            Recevez le meilleur de Mazaly chaque semaine.
+            {WHATSAPP_CHANNEL_URL
+              ? 'Rejoignez la chaîne WhatsApp de Mazaly et recevez le meilleur de la communauté sur votre téléphone.'
+              : 'Recevez le meilleur de Mazaly chaque semaine.'}
           </p>
           <div className="mt-5">
-            <NewsletterForm variant="dark" />
+            {WHATSAPP_CHANNEL_URL ? <WhatsAppButton /> : <NewsletterForm variant="dark" />}
           </div>
         </div>
       </div>

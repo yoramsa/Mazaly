@@ -4,7 +4,7 @@ import { Suspense } from 'react'
 import ArticleCard from '@/components/ArticleCard'
 import AdresseCard from '@/components/AdresseCard'
 import SectionTitle from '@/components/SectionTitle'
-import NewsletterCta from '@/components/NewsletterCta'
+import CommunityCta from '@/components/CommunityCta'
 import EmptyState from '@/components/ui/EmptyState'
 import PubBanner from '@/components/PubBanner'
 import MivzakPanel from '@/components/MivzakPanel'
@@ -194,9 +194,9 @@ export default async function HomePage() {
           )}
         </Reveal>
 
-        {/* ===== NEWSLETTER ===== */}
+        {/* ===== REJOINDRE MAZALY ===== */}
         <Reveal as="section">
-          <NewsletterCta />
+          <CommunityCta />
         </Reveal>
       </div>
     </div>

@@ -5,7 +5,7 @@ import { authorName, formatDate, readingTimeMinutes } from '@/lib/utils/format'
 import { CategoryBadge } from '@/components/ui/Badge'
 import { CalendarIcon, ClockIcon, EyeIcon, PenIcon } from '@/components/ui/icons'
 import ArticleCard from '@/components/ArticleCard'
-import NewsletterCta from '@/components/NewsletterCta'
+import CommunityCta from '@/components/CommunityCta'
 import SectionTitle from '@/components/SectionTitle'
 import ShareBar from '@/components/ShareBar'
 import ViewCounter from '@/components/ViewCounter'
@@ -118,10 +118,7 @@ export default function ArticleView({
 
         {/* ===== Newsletter ===== */}
         <div className="mt-14">
-          <NewsletterCta
-            title="Ne manquez rien de Mazaly"
-            description="Recevez nos meilleurs articles directement dans votre boîte mail, chaque semaine."
-          />
+          <CommunityCta title="Ne manquez rien de Mazaly" />
         </div>
       </article>
 
