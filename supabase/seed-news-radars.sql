@@ -5,7 +5,7 @@
 --  À exécuter dans Supabase (SQL Editor). Relançable sans doublon.
 -- ============================================================
 
-insert into articles (titre, slug, extrait, contenu, statut, featured, auteur_id, categorie_id, published_at)
+insert into articles (titre, slug, extrait, contenu, image_cover, statut, featured, auteur_id, categorie_id, published_at)
 values
 (
   'Radars : la tolérance fortement réduite sur les routes israéliennes',
@@ -13,6 +13,11 @@ values
   $ex$Le seuil de déclenchement des radars fixes passe de +11 à +6 km/h en ville. Ce qui change concrètement pour votre conduite, expliqué chiffre par chiffre.$ex$,
   $md$<p>Vous rouliez jusqu'ici avec une marge confortable au passage des radars ? Elle vient de fondre. L'agence de la circulation de la police israélienne a <strong>abaissé les seuils de déclenchement des radars fixes</strong>, avec un objectif affiché : concentrer les contrôles sur les excès qui mettent réellement des vies en danger.</p>
 <p>Concrètement, la « marge de tolérance » — cet écart au-dessus de la vitesse autorisée en dessous duquel aucun avis de contravention n'était émis — est réduite de moitié sur certains axes. Voici le détail.</p>
+
+<figure>
+<img src="/images/body-nouveaux-seuils-radars-israel.jpg" alt="Infographie officielle : les nouveaux seuils d'aquisition des radars en Israël" />
+<figcaption>L'infographie officielle de la campagne de sécurité routière. Traduction et explications ci-dessous.</figcaption>
+</figure>
 
 <h2>Les nouveaux seuils, type de route par type de route</h2>
 
@@ -68,6 +73,7 @@ values
 <h2>Ce qu'il faut retenir au volant</h2>
 <p>La marge n'existe plus vraiment. Le réflexe le plus simple reste le meilleur : caler sa vitesse sur la limite affichée plutôt que sur une tolérance supposée — d'autant que les nouveaux radars à vitesse moyenne rendent inutile le freinage de dernière seconde devant la cabine.</p>
 <p>Bouclez votre ceinture, restez attentifs, respectez les limitations. Et rentrez bien.</p>$md$,
+  '/images/nouveaux-seuils-radars-israel.jpg',
   'published', false,
   (select id from profiles where role = 'admin' limit 1),
   (select id from categories where slug = 'actualites'),

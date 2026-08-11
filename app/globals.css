@@ -117,6 +117,11 @@
   @apply border-l-4 border-or pl-5 italic my-6 text-marine/80;
 }
 
+/* Image légendée */
+.richtext figure { @apply my-7; }
+.richtext figure img { @apply my-0; }
+.richtext figcaption { @apply mt-2 text-center text-xs leading-relaxed text-marine/50; }
+
 /* Tableaux : conteneur scrollable sur mobile via <div class="table-wrap"> */
 .richtext .table-wrap {
   @apply my-7 overflow-x-auto rounded-2xl border border-marine/[0.08] shadow-soft;
