@@ -117,6 +117,26 @@
   @apply border-l-4 border-or pl-5 italic my-6 text-marine/80;
 }
 
+/* Tableaux : conteneur scrollable sur mobile via <div class="table-wrap"> */
+.richtext .table-wrap {
+  @apply my-7 overflow-x-auto rounded-2xl border border-marine/[0.08] shadow-soft;
+}
+.richtext table {
+  @apply w-full border-collapse bg-white text-left text-[0.95rem];
+}
+.richtext thead {
+  @apply bg-brand-gradient-soft;
+}
+.richtext th {
+  @apply whitespace-nowrap px-4 py-3 text-xs font-semibold uppercase tracking-[0.08em] text-marine;
+}
+.richtext td {
+  @apply border-t border-marine/[0.07] px-4 py-3 text-marine/80;
+}
+.richtext tbody tr:nth-child(even) {
+  @apply bg-creme/60;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
