@@ -59,7 +59,7 @@ export default function AdressesExplorer({ adresses }: { adresses: Adresse[] }) 
                   />
                 )}
                 {!active && (
-                  <span className="absolute inset-0 -z-10 rounded-full border border-marine/10 bg-white/70 backdrop-blur" />
+                  <span className="absolute inset-0 -z-10 rounded-full border border-marine/10 bg-surface/70 backdrop-blur" />
                 )}
                 {label}
                 <span className={active ? 'ml-1.5 opacity-80' : 'ml-1.5 opacity-50'}>
@@ -71,7 +71,10 @@ export default function AdressesExplorer({ adresses }: { adresses: Adresse[] }) 
         </div>
       )}
 
-      <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <motion.div
+        layout
+        className="no-scrollbar -mx-5 flex snap-x-mandatory gap-5 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3"
+      >
         <AnimatePresence mode="popLayout">
           {filtered.map((adresse) => (
             <motion.div
@@ -81,6 +84,7 @@ export default function AdressesExplorer({ adresses }: { adresses: Adresse[] }) 
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="w-[82vw] shrink-0 snap-start sm:w-auto"
             >
               <AdresseCard adresse={adresse} />
             </motion.div>

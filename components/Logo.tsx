@@ -29,7 +29,7 @@ export default function Logo({
       </span>
       <span
         className={`font-serif text-[1.55rem] font-bold leading-none tracking-tight ${
-          light ? 'text-creme' : 'text-marine'
+          light ? 'text-white' : 'text-marine'
         }`}
       >
         Mazaly

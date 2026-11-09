@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Inter, Playfair_Display, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({
@@ -12,6 +12,13 @@ const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
   display: 'swap',
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+  weight: ['500', '600'],
 })
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
@@ -55,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="fr" className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable}`}>
       <body>{children}</body>
     </html>
   )

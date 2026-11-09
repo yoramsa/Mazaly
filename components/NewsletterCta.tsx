@@ -15,8 +15,8 @@ export default function NewsletterCta({
         <div className="absolute bottom-0 right-1/4 h-60 w-60 rounded-full bg-mauve/25 blur-[90px]" />
       </div>
       <div className="relative mx-auto max-w-lg">
-        <h2 className="font-serif text-3xl font-bold text-creme md:text-4xl">{title}</h2>
-        <p className="mx-auto mt-3 max-w-md text-creme/70">{description}</p>
+        <h2 className="font-serif text-3xl font-bold text-white md:text-4xl">{title}</h2>
+        <p className="mx-auto mt-3 max-w-md text-white/70">{description}</p>
         <div className="mx-auto mt-8 max-w-md text-left">
           <NewsletterForm variant="dark" />
         </div>

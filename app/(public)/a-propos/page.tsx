@@ -62,8 +62,8 @@ export default function AProposPage() {
               <div className="absolute right-1/4 bottom-0 h-52 w-52 rounded-full bg-mauve/25 blur-[90px]" />
             </div>
             <div className="relative">
-              <h2 className="font-serif text-3xl font-bold text-creme">Rejoignez-nous</h2>
-              <p className="mt-2 text-creme/70">
+              <h2 className="font-serif text-3xl font-bold text-white">Rejoignez-nous</h2>
+              <p className="mt-2 text-white/70">
                 Inscrivez-vous à notre newsletter pour ne rien manquer.
               </p>
               <div className="mx-auto mt-6 max-w-md text-left">

@@ -8,15 +8,15 @@ export default function MivzakTicker({ items }: { items: Mivzak[] }) {
   const track = [...items, ...items]
 
   return (
-    <div className="relative z-50 flex items-stretch overflow-hidden bg-ink text-creme">
+    <div className="relative z-50 flex items-stretch overflow-hidden bg-ink text-white">
       {/* Label */}
-      <div className="relative z-10 flex shrink-0 items-center gap-2 bg-brand-gradient px-4 py-2 shadow-glow">
+      <div className="relative z-10 flex shrink-0 items-center gap-2 bg-rouge px-4 py-2 shadow-[0_0_30px_-8px_rgba(224,62,62,0.7)]">
         <span className="relative flex h-2 w-2">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
           <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
         </span>
         <span className="text-xs font-bold uppercase tracking-wider">
-          Mivzak<span className="ml-1 font-serif" dir="rtl">מבזק</span>
+          En direct<span className="ml-1 font-serif" dir="rtl">מבזק</span>
         </span>
       </div>
 
@@ -26,7 +26,7 @@ export default function MivzakTicker({ items }: { items: Mivzak[] }) {
           {track.map((m, i) => {
             const content = (
               <span className="inline-flex items-center gap-2 text-sm">
-                <span className="text-or">{m.urgent ? '🔴' : '•'}</span>
+                <span className={m.urgent ? 'text-rouge' : 'text-or'}>{m.urgent ? '●' : '•'}</span>
                 <span className={m.urgent ? 'font-semibold' : ''}>{m.texte}</span>
               </span>
             )

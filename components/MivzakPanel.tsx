@@ -12,7 +12,7 @@ export default function MivzakPanel({
   if (items.length === 0) return null
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-marine/[0.07] bg-white shadow-card">
+    <div className="overflow-hidden rounded-3xl border border-marine/[0.07] bg-surface shadow-card">
       {/* Header */}
       <div className="flex items-center justify-between bg-brand-gradient px-5 py-3.5 text-white">
         <div className="flex items-center gap-2.5">
@@ -39,23 +39,32 @@ export default function MivzakPanel({
       <ul className="divide-y divide-marine/[0.07]">
         {items.map((m) => {
           const inner = (
-            <div className="flex items-start gap-3 px-5 py-3.5 transition-colors">
-              <span className="shrink-0 pt-0.5 text-xs font-semibold tabular-nums text-bleu">
+            <div
+              className={`flex items-start gap-3 border-l-2 px-5 py-3.5 transition-colors ${
+                m.urgent ? 'border-rouge/70 bg-rouge/[0.04]' : 'border-transparent'
+              }`}
+            >
+              <span className="shrink-0 pt-0.5 font-mono text-xs font-semibold tabular-nums text-bleu">
                 {formatTime(m.created_at)}
               </span>
               <span
                 className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${
-                  m.urgent ? 'bg-or ring-2 ring-or/30' : 'bg-mauve/60'
+                  m.urgent ? 'animate-pulse-ring-rouge bg-rouge' : 'bg-mauve/60'
                 }`}
               />
               <span className="min-w-0 flex-1 text-sm leading-snug text-marine">
                 {m.urgent && (
-                  <span className="mr-1.5 rounded bg-or/15 px-1.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-wide text-or">
+                  <span className="mr-1.5 inline-flex items-center rounded bg-rouge px-1.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-wide text-white">
                     Urgent
                   </span>
                 )}
                 {m.texte}
               </span>
+              {m.lien && (
+                <span className="hidden shrink-0 self-center text-xs font-semibold text-bleu opacity-0 transition-all duration-300 group-hover:opacity-100 sm:-translate-x-1 sm:group-hover:translate-x-0 sm:inline-block">
+                  Lire →
+                </span>
+              )}
             </div>
           )
           return (
@@ -63,9 +72,6 @@ export default function MivzakPanel({
               {m.lien ? (
                 <Link href={m.lien} className="block hover:bg-brand-gradient-soft">
                   {inner}
-                  <span className="block px-5 pb-3 pl-[4.25rem] text-xs font-semibold text-bleu opacity-0 transition-opacity group-hover:opacity-100">
-                    Lire »
-                  </span>
                 </Link>
               ) : (
                 inner
