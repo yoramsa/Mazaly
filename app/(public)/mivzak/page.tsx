@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import PageHeader from '@/components/PageHeader'
 import MivzakPanel from '@/components/MivzakPanel'
+import MivzakTicker from '@/components/MivzakTicker'
 import { getMivzakim } from '@/lib/supabase/queries'
 
 export const revalidate = 30
@@ -22,7 +23,12 @@ export default async function MivzakPage() {
       />
       <div className="container-page max-w-3xl pb-20">
         {items.length > 0 ? (
-          <MivzakPanel items={items} showAll />
+          <>
+            <div className="mb-6 overflow-hidden rounded-2xl">
+              <MivzakTicker items={items} />
+            </div>
+            <MivzakPanel items={items} showAll />
+          </>
         ) : (
           <div className="surface mosaic flex flex-col items-center gap-2 px-6 py-16 text-center text-marine/55">
             <span className="text-3xl">📡</span>

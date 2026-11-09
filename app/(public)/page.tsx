@@ -8,6 +8,7 @@ import CommunityCta from '@/components/CommunityCta'
 import EmptyState from '@/components/ui/EmptyState'
 import PubBanner from '@/components/PubBanner'
 import MivzakPanel from '@/components/MivzakPanel'
+import MivzakTicker from '@/components/MivzakTicker'
 import Reveal from '@/components/motion/Reveal'
 import MeshBlobs from '@/components/motion/MeshBlobs'
 import WordReveal from '@/components/motion/WordReveal'
@@ -82,6 +83,9 @@ export default async function HomePage() {
         {/* ===== MIVZAKIM ===== */}
         {mivzakim.length > 0 && (
           <Reveal as="section" className="mb-16">
+            <div className="-mx-5 mb-4 overflow-hidden rounded-2xl sm:mx-0">
+              <MivzakTicker items={mivzakim} />
+            </div>
             <MivzakPanel items={mivzakim} />
           </Reveal>
         )}
@@ -113,7 +117,7 @@ export default async function HomePage() {
             <div className="grid gap-6 md:grid-cols-2">
               <Link
                 href={`/news/${hero.slug}`}
-                className="group relative overflow-hidden rounded-3xl bg-marine shadow-card transition-all duration-500 ease-premium hover:-translate-y-1 hover:shadow-lift"
+                className="group relative overflow-hidden rounded-3xl bg-ink shadow-card transition-all duration-500 ease-premium hover:-translate-y-1 hover:shadow-lift"
               >
                 <div className="relative aspect-[16/11]">
                   {hero.image_cover ? (
@@ -135,14 +139,14 @@ export default async function HomePage() {
                       À la une
                     </span>
                     {hero.categories && (
-                      <CategoryBadge categorie={hero.categories} className="border border-white/20 !bg-white/10 !text-creme" />
+                      <CategoryBadge categorie={hero.categories} className="border border-white/20 !bg-white/10 !text-white" />
                     )}
                   </div>
-                  <h3 className="mt-3 font-serif text-2xl font-bold leading-snug text-creme md:text-3xl">
+                  <h3 className="mt-3 font-serif text-2xl font-bold leading-snug text-white md:text-3xl">
                     {hero.titre}
                   </h3>
                   {hero.extrait && (
-                    <p className="mt-2 line-clamp-2 max-w-lg text-sm text-creme/75">
+                    <p className="mt-2 line-clamp-2 max-w-lg text-sm text-white/75">
                       {hero.extrait}
                     </p>
                   )}

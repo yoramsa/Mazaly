@@ -35,7 +35,7 @@ export default function NewsletterForm({
 
   const dark = variant === 'dark'
   const inputClass = dark
-    ? 'w-full rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-creme shadow-inset backdrop-blur transition-all duration-200 placeholder:text-creme/45 focus:border-or/60 focus:bg-white/15 focus:outline-none focus:ring-4 focus:ring-or/10'
+    ? 'w-full rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white shadow-inset backdrop-blur transition-all duration-200 placeholder:text-white/45 focus:border-or/60 focus:bg-white/15 focus:outline-none focus:ring-4 focus:ring-or/10'
     : 'input-premium'
 
   return (

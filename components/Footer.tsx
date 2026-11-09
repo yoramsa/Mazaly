@@ -6,7 +6,7 @@ import { WHATSAPP_CHANNEL_URL } from '@/lib/config'
 
 export default function Footer() {
   return (
-    <footer className="relative mt-24 overflow-hidden bg-ink text-creme">
+    <footer className="relative mt-24 overflow-hidden bg-ink text-white">
       {/* gradient glows */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-bleu/20 blur-[100px] motion-safe:animate-blob" />
@@ -24,7 +24,7 @@ export default function Footer() {
       <div className="container-page relative grid gap-12 py-16 md:grid-cols-3">
         <div>
           <Logo light />
-          <p className="mt-5 max-w-xs text-sm leading-relaxed text-creme/70">
+          <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/70">
             Le média communautaire francophone en Israël. News, blog et bonnes
             adresses au cœur de la communauté.
           </p>
@@ -34,7 +34,7 @@ export default function Footer() {
           <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-or">
             Navigation
           </h3>
-          <ul className="mt-5 space-y-3 text-sm text-creme/70">
+          <ul className="mt-5 space-y-3 text-sm text-white/70">
             {[
               { href: '/news', label: 'News' },
               { href: '/blog', label: 'Blog' },
@@ -58,7 +58,7 @@ export default function Footer() {
           <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-or">
             {WHATSAPP_CHANNEL_URL ? 'Nous suivre' : 'Newsletter'}
           </h3>
-          <p className="mt-5 text-sm leading-relaxed text-creme/70">
+          <p className="mt-5 text-sm leading-relaxed text-white/70">
             {WHATSAPP_CHANNEL_URL
               ? 'Rejoignez la chaîne WhatsApp de Mazaly et recevez le meilleur de la communauté sur votre téléphone.'
               : 'Recevez le meilleur de Mazaly chaque semaine.'}
@@ -69,7 +69,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="relative border-t border-white/10 py-5 text-center text-xs text-creme/50">
+      <div className="relative border-t border-white/10 py-5 text-center text-xs text-white/50">
         © {new Date().getFullYear()} Mazaly. Tous droits réservés.
       </div>
     </footer>

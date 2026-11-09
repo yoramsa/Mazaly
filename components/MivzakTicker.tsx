@@ -8,7 +8,7 @@ export default function MivzakTicker({ items }: { items: Mivzak[] }) {
   const track = [...items, ...items]
 
   return (
-    <div className="relative z-50 flex items-stretch overflow-hidden bg-ink text-creme">
+    <div className="relative z-50 flex items-stretch overflow-hidden bg-ink text-white">
       {/* Label */}
       <div className="relative z-10 flex shrink-0 items-center gap-2 bg-rouge px-4 py-2 shadow-[0_0_30px_-8px_rgba(224,62,62,0.7)]">
         <span className="relative flex h-2 w-2">

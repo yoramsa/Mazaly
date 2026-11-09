@@ -45,8 +45,8 @@ export default function WhatsAppCta({
           <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#25D366]/15 text-[#25D366]">
             <WhatsAppIcon size={28} />
           </span>
-          <h2 className="mt-5 font-serif text-3xl font-bold text-creme md:text-4xl">{title}</h2>
-          <p className="mx-auto mt-3 max-w-md text-creme/70 md:mx-0">{description}</p>
+          <h2 className="mt-5 font-serif text-3xl font-bold text-white md:text-4xl">{title}</h2>
+          <p className="mx-auto mt-3 max-w-md text-white/70 md:mx-0">{description}</p>
           <div className="mt-8">
             <WhatsAppButton />
           </div>
