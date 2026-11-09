@@ -5,7 +5,6 @@ function withAlpha(variable: string) {
 }
 
 const config: Config = {
-  darkMode: ['class', '#site-shell.dark'],
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',

@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Logo from './Logo'
-import ThemeToggle from './ThemeToggle'
 
 const links = [
   { href: '/news', label: 'News' },
@@ -79,14 +78,12 @@ export default function Navbar() {
                 </Link>
               )
             })}
-            <ThemeToggle className="ml-2" />
-            <Link href="/news" className="btn-primary ml-1">
+            <Link href="/news" className="btn-primary ml-2">
               Lire les news
             </Link>
           </div>
 
           <div className="flex items-center gap-2 md:hidden">
-            <ThemeToggle />
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
