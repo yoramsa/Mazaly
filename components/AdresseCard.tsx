@@ -3,12 +3,16 @@ import Link from 'next/link'
 import type { Adresse } from '@/lib/types'
 import { CategoryBadge, PaysBadge } from '@/components/ui/Badge'
 import { MapPinIcon } from '@/components/ui/icons'
+import TiltCard from '@/components/motion/TiltCard'
 
 export default function AdresseCard({ adresse }: { adresse: Adresse }) {
   const location = [adresse.ville, adresse.region].filter(Boolean).join(', ')
 
   return (
-    <article className="group relative h-full overflow-hidden rounded-3xl border border-marine/[0.07] bg-white shadow-soft transition-all duration-500 ease-premium hover:-translate-y-1.5 hover:shadow-lift">
+    <TiltCard
+      as="article"
+      className="group relative h-full overflow-hidden rounded-3xl border border-marine/[0.07] bg-surface shadow-soft transition-shadow duration-500 ease-premium hover:shadow-lift"
+    >
       <Link href={`/bonnes-adresses/${adresse.slug}`} className="flex h-full flex-col">
         <div className="relative aspect-[4/3] overflow-hidden">
           {adresse.image ? (
@@ -48,6 +52,6 @@ export default function AdresseCard({ adresse }: { adresse: Adresse }) {
           )}
         </div>
       </Link>
-    </article>
+    </TiltCard>
   )
 }

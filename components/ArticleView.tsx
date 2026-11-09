@@ -10,6 +10,7 @@ import SectionTitle from '@/components/SectionTitle'
 import ShareBar from '@/components/ShareBar'
 import ViewCounter from '@/components/ViewCounter'
 import Reveal from '@/components/motion/Reveal'
+import ReadingProgress from '@/components/motion/ReadingProgress'
 
 type ArticleViewProps = {
   article: Article
@@ -30,6 +31,7 @@ export default function ArticleView({
 
   return (
     <div className="relative overflow-hidden">
+      <ReadingProgress />
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute right-[-10%] top-[-20%] h-80 w-80 rounded-full bg-bleu/15 blur-[110px]" />
         <div className="absolute left-[-8%] top-[15%] h-72 w-72 rounded-full bg-mauve/15 blur-[110px]" />

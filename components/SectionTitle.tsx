@@ -27,7 +27,7 @@ export default function SectionTitle({
       {href && (
         <Link
           href={href}
-          className="group inline-flex shrink-0 items-center gap-1 rounded-full border border-marine/10 bg-white/70 px-4 py-1.5 text-sm font-medium text-marine backdrop-blur transition-all duration-300 hover:border-bleu/30 hover:text-bleu"
+          className="group inline-flex shrink-0 items-center gap-1 rounded-full border border-marine/10 bg-surface/70 px-4 py-1.5 text-sm font-medium text-marine backdrop-blur transition-all duration-300 hover:border-bleu/30 hover:text-bleu"
         >
           {linkLabel}
           <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>

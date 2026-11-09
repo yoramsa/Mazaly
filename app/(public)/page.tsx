@@ -9,6 +9,11 @@ import EmptyState from '@/components/ui/EmptyState'
 import PubBanner from '@/components/PubBanner'
 import MivzakPanel from '@/components/MivzakPanel'
 import Reveal from '@/components/motion/Reveal'
+import MeshBlobs from '@/components/motion/MeshBlobs'
+import WordReveal from '@/components/motion/WordReveal'
+import MagneticButton from '@/components/motion/MagneticButton'
+import HeroVisual from '@/components/HeroVisual'
+import { CategoryBadge } from '@/components/ui/Badge'
 import {
   getFeaturedArticles,
   getArticlesByType,
@@ -34,10 +39,7 @@ export default async function HomePage() {
     <div>
       {/* ===== HERO ===== */}
       <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute right-[-10%] top-[-20%] h-[34rem] w-[34rem] rounded-full bg-bleu/20 blur-[120px]" />
-          <div className="absolute left-[-10%] top-[20%] h-[28rem] w-[28rem] rounded-full bg-mauve/20 blur-[120px]" />
-        </div>
+        <MeshBlobs />
 
         <div className="container-page grid items-center gap-12 py-16 md:grid-cols-2 md:py-24">
           <Reveal>
@@ -45,37 +47,33 @@ export default async function HomePage() {
               <span className="h-1.5 w-1.5 rounded-full bg-brand-gradient" />
               Communauté francophone · Israël
             </span>
-            <h1 className="mt-5 font-serif text-3xl font-bold leading-[1.12] tracking-tight text-marine sm:text-4xl md:text-5xl">
-              Le média de la <span className="text-gradient">communauté</span> francophone en Israël
+            <h1 className="mt-5 font-serif text-4xl font-bold leading-[1.1] tracking-tight text-marine sm:text-5xl md:text-6xl">
+              <WordReveal
+                text="Le média de la communauté francophone en Israël"
+                gradientWords={['communauté']}
+                delay={0.1}
+              />
             </h1>
             <p className="mt-5 max-w-md text-base leading-relaxed text-marine/65 md:text-lg">
               Actualités, articles de fond et bonnes adresses, sélectionnés pour
               celles et ceux qui font vivre la francophonie en Israël.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link href="/news" className="btn-primary">
-                Découvrir les news
-              </Link>
-              <Link href="/bonnes-adresses" className="btn-ghost">
-                Bonnes adresses
-              </Link>
+              <MagneticButton>
+                <Link href="/news" className="btn-primary">
+                  Découvrir les news
+                </Link>
+              </MagneticButton>
+              <MagneticButton>
+                <Link href="/bonnes-adresses" className="btn-ghost">
+                  Bonnes adresses
+                </Link>
+              </MagneticButton>
             </div>
           </Reveal>
 
           <Reveal delay={0.15} className="relative">
-            <div className="relative mx-auto aspect-square w-full max-w-sm">
-              <div className="absolute inset-6 rounded-[2.5rem] bg-brand-gradient opacity-90 blur-2xl" />
-              <div className="glass relative flex h-full w-full items-center justify-center rounded-[2.5rem] shadow-lift">
-                <Image
-                  src="/mazaly-icon.png"
-                  alt="Mazaly"
-                  width={300}
-                  height={300}
-                  priority
-                  className="w-3/5 animate-float drop-shadow-[0_20px_40px_rgba(74,111,212,0.35)]"
-                />
-              </div>
-            </div>
+            <HeroVisual />
           </Reveal>
         </div>
       </section>
@@ -92,9 +90,13 @@ export default async function HomePage() {
         <Reveal as="section" className="mb-20">
           <SectionTitle title="Bonnes adresses" href="/bonnes-adresses" eyebrow="À découvrir" />
           {adresses.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="no-scrollbar -mx-5 flex snap-x-mandatory gap-5 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
               {adresses.map((adresse, i) => (
-                <Reveal key={adresse.id} delay={i * 0.06}>
+                <Reveal
+                  key={adresse.id}
+                  delay={i * 0.06}
+                  className="w-[78vw] shrink-0 snap-start sm:w-auto"
+                >
                   <AdresseCard adresse={adresse} />
                 </Reveal>
               ))}
@@ -120,7 +122,7 @@ export default async function HomePage() {
                       alt={hero.titre}
                       fill
                       priority
-                      className="object-cover transition-transform duration-700 ease-premium group-hover:scale-105"
+                      className="object-cover transition-transform duration-[1400ms] ease-premium group-hover:scale-110 group-hover:translate-x-[1.5%] group-hover:-translate-y-[1.5%]"
                     />
                   ) : (
                     <div className="mosaic h-full w-full" />
@@ -128,9 +130,14 @@ export default async function HomePage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
                 </div>
                 <div className="absolute bottom-0 p-7">
-                  <span className="eyebrow border-white/20 bg-white/10 text-or">
-                    À la une
-                  </span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="eyebrow border-white/20 bg-white/10 text-or">
+                      À la une
+                    </span>
+                    {hero.categories && (
+                      <CategoryBadge categorie={hero.categories} className="border border-white/20 !bg-white/10 !text-creme" />
+                    )}
+                  </div>
                   <h3 className="mt-3 font-serif text-2xl font-bold leading-snug text-creme md:text-3xl">
                     {hero.titre}
                   </h3>
@@ -196,7 +203,7 @@ export default async function HomePage() {
 
         {/* ===== REJOINDRE MAZALY ===== */}
         <Reveal as="section">
-          <CommunityCta />
+          <CommunityCta showPhone />
         </Reveal>
       </div>
     </div>

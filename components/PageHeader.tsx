@@ -1,4 +1,5 @@
 import Reveal from '@/components/motion/Reveal'
+import MeshBlobs from '@/components/motion/MeshBlobs'
 
 export default function PageHeader({
   eyebrow,
@@ -11,10 +12,13 @@ export default function PageHeader({
 }) {
   return (
     <section className="relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute right-[-10%] top-[-30%] h-80 w-80 rounded-full bg-bleu/15 blur-[110px]" />
-        <div className="absolute left-[-8%] top-[10%] h-72 w-72 rounded-full bg-mauve/15 blur-[110px]" />
-      </div>
+      <MeshBlobs
+        blobs={[
+          { className: 'right-[-10%] top-[-30%] h-80 w-80 bg-bleu/15 animate-blob' },
+          { className: 'left-[-8%] top-[10%] h-72 w-72 bg-mauve/15 animate-blob-slow' },
+        ]}
+        blur={110}
+      />
       <div className="container-page py-14 md:py-20">
         <Reveal>
           {eyebrow && (

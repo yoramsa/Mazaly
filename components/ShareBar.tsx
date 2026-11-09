@@ -51,7 +51,7 @@ export default function ShareBar({ title }: { title: string }) {
           href={url ? t.href : '#'}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-full border border-marine/[0.12] bg-white/70 px-4 py-1.5 text-xs font-semibold text-marine backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-bleu/40 hover:text-bleu hover:shadow-soft"
+          className="rounded-full border border-marine/[0.12] bg-surface/70 px-4 py-1.5 text-xs font-semibold text-marine backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-bleu/40 hover:text-bleu hover:shadow-soft"
         >
           {t.label}
         </a>
@@ -59,7 +59,7 @@ export default function ShareBar({ title }: { title: string }) {
       <button
         type="button"
         onClick={copyLink}
-        className="inline-flex items-center gap-1.5 rounded-full border border-marine/[0.12] bg-white/70 px-4 py-1.5 text-xs font-semibold text-marine backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-bleu/40 hover:text-bleu hover:shadow-soft"
+        className="inline-flex items-center gap-1.5 rounded-full border border-marine/[0.12] bg-surface/70 px-4 py-1.5 text-xs font-semibold text-marine backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-bleu/40 hover:text-bleu hover:shadow-soft"
       >
         {copied ? (
           <>

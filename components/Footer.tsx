@@ -9,8 +9,16 @@ export default function Footer() {
     <footer className="relative mt-24 overflow-hidden bg-ink text-creme">
       {/* gradient glows */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-bleu/20 blur-[100px]" />
-        <div className="absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-mauve/20 blur-[100px]" />
+        <div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-bleu/20 blur-[100px] motion-safe:animate-blob" />
+        <div className="absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-mauve/20 blur-[100px] motion-safe:animate-blob-slow" />
+      </div>
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 select-none overflow-hidden text-center font-serif font-bold leading-none text-white/[0.04]"
+        style={{ fontSize: 'min(22vw, 14rem)' }}
+      >
+        Mazaly
       </div>
 
       <div className="container-page relative grid gap-12 py-16 md:grid-cols-3">
@@ -36,9 +44,9 @@ export default function Footer() {
               <li key={l.href}>
                 <Link
                   href={l.href}
-                  className="inline-flex items-center gap-1.5 transition-colors hover:text-or"
+                  className="group inline-flex items-center gap-1.5 transition-colors hover:text-or"
                 >
-                  <span className="h-px w-3 bg-or/40 transition-all duration-300" />
+                  <span className="h-px w-3 bg-or/40 transition-all duration-300 group-hover:w-6 group-hover:bg-or" />
                   {l.label}
                 </Link>
               </li>

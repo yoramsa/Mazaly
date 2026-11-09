@@ -5,23 +5,55 @@
 @layer base {
   :root {
     color-scheme: light;
+
+    --c-marine: 27 43 107;
+    --c-bleu: 74 111 212;
+    --c-mauve: 123 94 167;
+    --c-creme: 250 248 245;
+    --c-or: 201 168 76;
+    --c-ink: 14 20 48;
+    --c-surface: 255 255 255;
+    --c-rouge: 224 62 62;
+
+    --body-glow-1: rgba(74, 111, 212, 0.1);
+    --body-glow-2: rgba(123, 94, 167, 0.1);
+    --body-glow-3: rgba(201, 168, 76, 0.08);
+  }
+
+  #site-shell.dark {
+    color-scheme: dark;
+
+    --c-marine: 232 235 248;
+    --c-bleu: 123 155 255;
+    --c-mauve: 177 151 219;
+    --c-creme: 11 13 24;
+    --c-or: 224 193 112;
+    --c-surface: 23 26 42;
+
+    --body-glow-1: rgba(90, 125, 220, 0.16);
+    --body-glow-2: rgba(140, 110, 190, 0.14);
+    --body-glow-3: rgba(201, 168, 76, 0.07);
   }
 
   body {
     @apply bg-creme text-marine font-sans antialiased;
-    background-color: #FAF8F5;
     background-image:
-      radial-gradient(60rem 60rem at 110% -10%, rgba(74, 111, 212, 0.1), transparent 60%),
-      radial-gradient(50rem 50rem at -10% 0%, rgba(123, 94, 167, 0.1), transparent 55%),
-      radial-gradient(40rem 40rem at 50% 120%, rgba(201, 168, 76, 0.08), transparent 60%);
+      radial-gradient(60rem 60rem at 110% -10%, var(--body-glow-1), transparent 60%),
+      radial-gradient(50rem 50rem at -10% 0%, var(--body-glow-2), transparent 55%),
+      radial-gradient(40rem 40rem at 50% 120%, var(--body-glow-3), transparent 60%);
     background-attachment: fixed;
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
 
   ::selection {
-    background: rgba(74, 111, 212, 0.18);
+    background: rgba(74, 111, 212, 0.25);
+    color: rgb(var(--c-marine));
   }
 
-  /* nicer focus rings */
+  input, textarea {
+    caret-color: rgb(var(--c-bleu));
+  }
+
   *:focus-visible {
     outline: 2px solid rgba(74, 111, 212, 0.55);
     outline-offset: 2px;
@@ -34,12 +66,11 @@
     @apply mx-auto w-full max-w-6xl px-5 sm:px-6;
   }
 
-  /* Glass surface */
   .glass {
-    background: rgba(255, 255, 255, 0.65);
+    background: rgb(var(--c-surface) / 0.65);
     backdrop-filter: saturate(180%) blur(16px);
     -webkit-backdrop-filter: saturate(180%) blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid rgb(var(--c-marine) / 0.08);
   }
 
   .glass-dark {
@@ -49,47 +80,65 @@
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  /* Gradient text */
   .text-gradient {
     @apply bg-brand-gradient bg-clip-text text-transparent;
   }
 
-  /* Premium surface card */
   .surface {
-    @apply rounded-3xl border border-marine/[0.07] bg-white shadow-card;
+    @apply rounded-3xl border border-marine/[0.07] bg-surface shadow-card;
   }
 
-  /* Eyebrow / pill label */
   .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full border border-marine/10 bg-white/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-marine/70 backdrop-blur;
+    @apply inline-flex items-center gap-2 rounded-full border border-marine/10 bg-surface/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-marine/70 backdrop-blur;
   }
 
-  /* Buttons */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-gradient px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-all duration-300 ease-premium hover:-translate-y-0.5 hover:shadow-lift active:translate-y-0;
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-brand-gradient px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-all duration-300 ease-premium hover:-translate-y-0.5 hover:shadow-lift active:translate-y-0;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      115deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 80%
+    );
+    transform: translateX(-120%);
+  }
+
+  .btn-primary:hover::before {
+    transform: translateX(120%);
+    transition: transform 0.9s ease;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-marine/[0.15] bg-white/70 px-5 py-2.5 text-sm font-semibold text-marine backdrop-blur transition-all duration-300 ease-premium hover:-translate-y-0.5 hover:border-marine/25 hover:shadow-soft;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-marine/[0.15] bg-surface/70 px-5 py-2.5 text-sm font-semibold text-marine backdrop-blur transition-all duration-300 ease-premium hover:-translate-y-0.5 hover:border-marine/25 hover:shadow-soft;
   }
 
   .input-premium {
-    @apply w-full rounded-2xl border border-marine/[0.12] bg-white/80 px-4 py-3 text-sm text-marine shadow-inset transition-all duration-200 placeholder:text-marine/40 focus:border-bleu/60 focus:bg-white focus:outline-none focus:ring-4 focus:ring-bleu/10;
+    @apply w-full rounded-2xl border border-marine/[0.12] bg-surface/80 px-4 py-3 text-sm text-marine shadow-inset transition-all duration-200 placeholder:text-marine/40 focus:border-bleu/60 focus:bg-surface focus:outline-none focus:ring-4 focus:ring-bleu/10;
   }
 }
 
-/* Dotted mosaic backdrop */
 .mosaic {
   background-color: rgba(74, 111, 212, 0.03);
   background-image: radial-gradient(rgba(74, 111, 212, 0.16) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 
-/* Hide scrollbar utility for mobile menus */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Mivzak ticker */
+.snap-x-mandatory {
+  scroll-snap-type: x mandatory;
+}
+.snap-start {
+  scroll-snap-align: start;
+}
+
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -102,7 +151,6 @@
   animation-play-state: paused;
 }
 
-/* Rich text */
 .richtext {
   @apply text-marine/90 leading-relaxed text-[1.05rem];
 }
@@ -117,17 +165,15 @@
   @apply border-l-4 border-or pl-5 italic my-6 text-marine/80;
 }
 
-/* Image légendée */
 .richtext figure { @apply my-7; }
 .richtext figure img { @apply my-0; }
 .richtext figcaption { @apply mt-2 text-center text-xs leading-relaxed text-marine/50; }
 
-/* Tableaux : conteneur scrollable sur mobile via <div class="table-wrap"> */
 .richtext .table-wrap {
   @apply my-7 overflow-x-auto rounded-2xl border border-marine/[0.08] shadow-soft;
 }
 .richtext table {
-  @apply w-full border-collapse bg-white text-left text-[0.95rem];
+  @apply w-full border-collapse bg-surface text-left text-[0.95rem];
 }
 .richtext thead {
   @apply bg-brand-gradient-soft;
@@ -142,9 +188,42 @@
   @apply bg-creme/60;
 }
 
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+#site-shell.dark .grain-overlay {
+  opacity: 0.06;
+  mix-blend-mode: soft-light;
+}
+
+.skeleton {
+  @apply relative overflow-hidden bg-marine/[0.06];
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    rgb(var(--c-surface) / 0.55),
+    transparent
+  );
+  animation: shimmer 1.6s infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }
