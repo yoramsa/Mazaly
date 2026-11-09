@@ -20,7 +20,6 @@ export default function MivzakPanel({
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/80" />
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-white" />
           </span>
-          <span className="text-xs font-bold uppercase tracking-wider">En direct</span>
           <span className="font-serif text-lg font-bold leading-none">Mivzakim</span>
           <span className="font-serif text-base leading-none text-white/80" dir="rtl">
             מבזקים
@@ -61,6 +60,11 @@ export default function MivzakPanel({
                 )}
                 {m.texte}
               </span>
+              {m.lien && (
+                <span className="hidden shrink-0 self-center text-xs font-semibold text-bleu opacity-0 transition-all duration-300 group-hover:opacity-100 sm:-translate-x-1 sm:group-hover:translate-x-0 sm:inline-block">
+                  Lire →
+                </span>
+              )}
             </div>
           )
           return (
@@ -68,9 +72,6 @@ export default function MivzakPanel({
               {m.lien ? (
                 <Link href={m.lien} className="block hover:bg-brand-gradient-soft">
                   {inner}
-                  <span className="block px-5 pb-3 pl-[4.25rem] text-xs font-semibold text-bleu opacity-0 transition-opacity group-hover:opacity-100">
-                    Lire »
-                  </span>
                 </Link>
               ) : (
                 inner
