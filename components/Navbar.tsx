@@ -8,7 +8,6 @@ import Logo from './Logo'
 
 const links = [
   { href: '/news', label: 'News' },
-  { href: '/mivzak', label: 'Mivzak' },
   { href: '/blog', label: 'Blog' },
   { href: '/bonnes-adresses', label: 'Bonnes adresses' },
   { href: '/a-propos', label: 'À propos' },

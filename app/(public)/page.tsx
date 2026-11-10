@@ -7,8 +7,6 @@ import SectionTitle from '@/components/SectionTitle'
 import CommunityCta from '@/components/CommunityCta'
 import EmptyState from '@/components/ui/EmptyState'
 import PubBanner from '@/components/PubBanner'
-import MivzakPanel from '@/components/MivzakPanel'
-import MivzakTicker from '@/components/MivzakTicker'
 import Reveal from '@/components/motion/Reveal'
 import MeshBlobs from '@/components/motion/MeshBlobs'
 import WordReveal from '@/components/motion/WordReveal'
@@ -19,18 +17,16 @@ import {
   getFeaturedArticles,
   getArticlesByType,
   getFeaturedAdresses,
-  getMivzakim,
 } from '@/lib/supabase/queries'
 
 export const revalidate = 60
 
 export default async function HomePage() {
-  const [featured, news, blog, adresses, mivzakim] = await Promise.all([
+  const [featured, news, blog, adresses] = await Promise.all([
     getFeaturedArticles(3).catch(() => []),
     getArticlesByType('news', 6).catch(() => []),
     getArticlesByType('blog', 4).catch(() => []),
     getFeaturedAdresses(6).catch(() => []),
-    getMivzakim(6).catch(() => []),
   ])
 
   const hero = featured[0]
@@ -95,16 +91,6 @@ export default async function HomePage() {
             <EmptyState label="Aucune actualité pour le moment." />
           )}
         </Reveal>
-
-        {/* ===== MIVZAKIM ===== */}
-        {mivzakim.length > 0 && (
-          <Reveal as="section" className="mb-16">
-            <div className="-mx-5 mb-4 overflow-hidden rounded-2xl sm:mx-0">
-              <MivzakTicker items={mivzakim} />
-            </div>
-            <MivzakPanel items={mivzakim} />
-          </Reveal>
-        )}
 
         {/* ===== BONNES ADRESSES (À découvrir) ===== */}
         <Reveal as="section" className="mb-20">
