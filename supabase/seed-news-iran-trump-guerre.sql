@@ -23,7 +23,7 @@ values
 <h2>Netanyahou sous pression, selon des informations israéliennes</h2>
 <p>Toujours selon la presse israélienne, Benyamin Netanyahou <strong>appellerait</strong> Trump tous les jours pour le pousser à reprendre la guerre. Cette information n'est à ce stade pas confirmée officiellement de part et d'autre : elle est rapportée au conditionnel par les médias israéliens, et Mazaly la relaie avec la même prudence.</p>
 
-<p>Entre l'optimisme affiché par Washington, le démenti ferme de Téhéran et les pressions rapportées de Jérusalem, le dossier iranien reste à haut risque. À suivre de près. 👀</p>$md$,
+<p>Entre l'optimisme affiché par Washington, le démenti ferme de Téhéran et les pressions rapportées de Jérusalem, le dossier iranien reste à haut risque. Trump multiplie les annonces positives… mais est-ce que ça ne serait pas du bluff ? À suivre de près. 👀</p>$md$,
   'published', true,
   (select id from profiles where role = 'admin' limit 1),
   (select id from categories where slug = 'actualites'),
