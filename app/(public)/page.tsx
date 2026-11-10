@@ -80,6 +80,22 @@ export default async function HomePage() {
       </section>
 
       <div className="container-page pb-16">
+        {/* ===== NEWS ===== */}
+        <Reveal as="section" className="mb-20">
+          <SectionTitle title="News" href="/news" eyebrow="Actualités" />
+          {news.length > 0 ? (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {news.map((article, i) => (
+                <Reveal key={article.id} delay={i * 0.06}>
+                  <ArticleCard article={article} basePath="/news" />
+                </Reveal>
+              ))}
+            </div>
+          ) : (
+            <EmptyState label="Aucune actualité pour le moment." />
+          )}
+        </Reveal>
+
         {/* ===== MIVZAKIM ===== */}
         {mivzakim.length > 0 && (
           <Reveal as="section" className="mb-16">
@@ -166,22 +182,6 @@ export default async function HomePage() {
             </div>
           </Reveal>
         )}
-
-        {/* ===== NEWS ===== */}
-        <Reveal as="section" className="mb-20">
-          <SectionTitle title="News" href="/news" eyebrow="Actualités" />
-          {news.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {news.map((article, i) => (
-                <Reveal key={article.id} delay={i * 0.06}>
-                  <ArticleCard article={article} basePath="/news" />
-                </Reveal>
-              ))}
-            </div>
-          ) : (
-            <EmptyState label="Aucune actualité pour le moment." />
-          )}
-        </Reveal>
 
         <section className="mb-20">
           <Suspense fallback={null}>
